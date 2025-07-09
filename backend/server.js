@@ -33,11 +33,13 @@ app.use("/api/analytics", analyticsRoutes);
 app.use("/api/shipping-address", shippingAddressRoutes);
 app.use("/api/reviews", reviewRoutes);
 
-app.use(express.static(path.join(__dirname, "/frontend/dist")));
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
-app.get("{0,}", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
-});
+    app.get("{0,}", (req, res) => {
+        res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+    });
+}
 
 // Start the server
 app.listen(PORT, () => {
