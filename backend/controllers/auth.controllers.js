@@ -25,14 +25,14 @@ const setCookies = (res, accessToken, refreshToken) => {
     // This function should set the access and refresh tokens in cookies.
     res.cookie("accessToken", accessToken, {
         httpOnly: true, // Prevents client-side JavaScript from accessing the cookie or XSS attacks
-        secure: true,
+        secure: false,
         sameSite: "Strict", // Helps prevent CSRF attacks
         maxAge: 15 * 60 * 1000, // 15 minutes
     });
 
     res.cookie("refreshToken", refreshToken, {
         httpOnly: true, // Prevents client-side JavaScript from accessing the cookie or XSS attacks
-        secure: true,
+        secure: false,
         sameSite: "Strict", // Helps prevent CSRF attacks
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
