@@ -28,6 +28,8 @@ const setCookies = (res, accessToken, refreshToken) => {
         secure: true,
         sameSite: "None", // Helps prevent CSRF attacks
         maxAge: 15 * 60 * 1000, // 15 minutes
+        path: "/",
+        domain: "https://ecommerce-store-14.onrender.com",
     });
 
     res.cookie("refreshToken", refreshToken, {
@@ -35,6 +37,8 @@ const setCookies = (res, accessToken, refreshToken) => {
         secure: true,
         sameSite: "None", // Helps prevent CSRF attacks
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        path: "/",
+        domain: "https://ecommerce-store-14.onrender.com",
     });
 };
 
