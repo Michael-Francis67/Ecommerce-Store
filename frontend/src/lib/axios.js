@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
-    ? import.meta.env.VITE_BASE_URL + "/api"
-    : "https://ecommerce-store-13.onrender.com/api";
+    ? import.meta.env.VITE_BASE_URL
+    : "https://ecommerce-store-13.onrender.com";
 
 const axiosInstance = axios.create({
     baseURL: BASE_URL, // Use the appropriate base URL for development or production
