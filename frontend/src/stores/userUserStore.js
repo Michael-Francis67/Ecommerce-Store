@@ -16,11 +16,15 @@ export const useUserStore = create((set, get) => ({
         }
 
         try {
-            const response = await axios.post("/api/auth/signup", {
-                name,
-                email,
-                password,
-            });
+            const response = await axios.post(
+                "/api/auth/signup",
+                {
+                    name,
+                    email,
+                    password,
+                },
+                {withCredentials: true}
+            );
             set({user: response.data.user, loading: false});
             toast.success(response.data.message || "User created successfully");
         } catch (error) {
@@ -33,10 +37,14 @@ export const useUserStore = create((set, get) => ({
         set({loading: true});
 
         try {
-            const response = await axios.post("/api/auth/login", {
-                email,
-                password,
-            });
+            const response = await axios.post(
+                "/api/auth/login",
+                {
+                    email,
+                    password,
+                },
+                {withCredentials: true}
+            );
             set({user: response.data.user, loading: false});
             toast.success(response.data.message || "Login successful");
         } catch (error) {
