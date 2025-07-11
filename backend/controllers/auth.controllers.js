@@ -26,7 +26,7 @@ const setCookies = (res, accessToken, refreshToken) => {
     res.cookie("accessToken", accessToken, {
         httpOnly: true, // Prevents client-side JavaScript from accessing the cookie or XSS attacks
         secure: process.env.NODE_ENV === "production",
-        sameSite: "Strict", // Helps prevent CSRF attacks
+        sameSite: "None", // Helps prevent CSRF attacks
         maxAge: 15 * 60 * 1000, // 15 minutes
     });
 
