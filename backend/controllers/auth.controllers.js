@@ -28,8 +28,6 @@ const setCookies = (res, accessToken, refreshToken) => {
         secure: true,
         sameSite: "None", // Helps prevent CSRF attacks
         maxAge: 15 * 60 * 1000, // 15 minutes
-        path: "/",
-        domain: "https://ecommerce-store-14.onrender.com",
     });
 
     res.cookie("refreshToken", refreshToken, {
@@ -37,8 +35,6 @@ const setCookies = (res, accessToken, refreshToken) => {
         secure: true,
         sameSite: "None", // Helps prevent CSRF attacks
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-        path: "/",
-        domain: "https://ecommerce-store-14.onrender.com",
     });
 };
 
@@ -62,7 +58,14 @@ export const signup = async (req, res) => {
         await storeRefreshToken(user._id, refreshToken);
 
         // Set the refresh token in a cookie
-        setCookies(res, accessToken, refreshToken);
+        setCookies(res, accessToken, refreshToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            path: "/",
+            domain: "https://ecommerce-store-14.onrender.com",
+        });
 
         res.status(201).json({
             message: "User created successfully",
@@ -90,7 +93,14 @@ export const login = async (req, res) => {
             await storeRefreshToken(user._id, refreshToken);
 
             // Set the access and refresh tokens in cookies
-            setCookies(res, accessToken, refreshToken);
+            setCookies(res, accessToken, refreshToken, {
+                httpOnly: true,
+                secure: true,
+                sameSite: "None",
+                maxAge: 15 * 60 * 1000,
+                path: "/",
+                domain: "https://ecommerce-store-14.onrender.com",
+            });
 
             res.status(200).json({
                 message: "Login successful",
