@@ -63,8 +63,8 @@ export const signup = async (req, res) => {
             secure: true,
             sameSite: "None",
             maxAge: 7 * 24 * 60 * 60 * 1000,
-            path: "/",
-            domain: "https://ecommerce-store-14.onrender.com",
+            path: "/signup",
+            domain: "https://ecommerce-store-14.onrender.com/signup",
         });
 
         res.status(201).json({
@@ -98,8 +98,8 @@ export const login = async (req, res) => {
                 secure: true,
                 sameSite: "None",
                 maxAge: 15 * 60 * 1000,
-                path: "/",
-                domain: "https://ecommerce-store-14.onrender.com",
+                path: "/login",
+                domain: "https://ecommerce-store-14.onrender.com/login",
             });
 
             res.status(200).json({
