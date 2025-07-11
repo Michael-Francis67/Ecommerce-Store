@@ -7,7 +7,7 @@ export const protectRoute = async (req, res, next) => {
         // Check if the token is provided
 
         if (!token) {
-            return res.status(401).json({message: "Unauthorized - No access token provided"});
+            return res.status(400).json({message: "Unauthorized - No access token provided"});
         }
 
         try {
@@ -31,7 +31,7 @@ export const protectRoute = async (req, res, next) => {
     } catch (error) {
         console.error("Error in protectRoute middleware:", error);
         if (error.name === "TokenExpiredError") {
-            return res.status(401).json({message: "Unauthorized - Access token expired"});
+            return res.status(404).json({message: "Unauthorized - Access token expired"});
         }
         return res.status(500).json({message: "Internal server error", error: error.message});
     }
