@@ -22,7 +22,7 @@ const __dirname = path.resolve();
 
 app.use(
     cors({
-        origin: process.env.ORIGIN,
+        origin: "https://ecommerce-store-14.onrender.com",
         credentials: true,
     })
 );
