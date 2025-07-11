@@ -24,16 +24,16 @@ const storeRefreshToken = async (userId, refreshToken) => {
 const setCookies = (res, accessToken, refreshToken) => {
     // This function should set the access and refresh tokens in cookies.
     res.cookie("accessToken", accessToken, {
-        httpOnly: false, // Prevents client-side JavaScript from accessing the cookie or XSS attacks
+        httpOnly: true, // Prevents client-side JavaScript from accessing the cookie or XSS attacks
         secure: true,
-        sameSite: "None", // Helps prevent CSRF attacks
+        sameSite: "Lax", // Helps prevent CSRF attacks
         maxAge: 15 * 60 * 1000, // 15 minutes
     });
 
     res.cookie("refreshToken", refreshToken, {
-        httpOnly: false, // Prevents client-side JavaScript from accessing the cookie or XSS attacks
+        httpOnly: true, // Prevents client-side JavaScript from accessing the cookie or XSS attacks
         secure: true,
-        sameSite: "None", // Helps prevent CSRF attacks
+        sameSite: "Lax", // Helps prevent CSRF attacks
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 };
