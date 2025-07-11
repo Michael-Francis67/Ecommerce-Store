@@ -13,7 +13,7 @@ export const useOrdersStore = create((set, get) => ({
     fetchUser: async () => {
         set({loading: true});
         try {
-            const res = await axios.get(`/auth/profile`);
+            const res = await axios.get(`/api/auth/profile`);
             set({name: res.data.name});
             set({email: res.data.email});
             set({profilePic: res.data.profilePic});
@@ -27,7 +27,7 @@ export const useOrdersStore = create((set, get) => ({
     fetchTransactions: async () => {
         set({loading: true});
         try {
-            const res = await axios.get("/payments/transactions");
+            const res = await axios.get("/api/payments/transactions");
             set({transactions: res.data});
         } catch (err) {
             console.error("Error fetching user:", err);
@@ -42,7 +42,7 @@ export const useOrdersStore = create((set, get) => ({
         const reader = new FileReader();
         reader.onloadend = async () => {
             try {
-                const res = await axios.post(`/auth/profile`, {profile: reader.result});
+                const res = await axios.post(`/api/auth/profile`, {profile: reader.result});
                 set({
                     profilePic: await res.data.profilePic,
                 });
@@ -60,7 +60,7 @@ export const useOrdersStore = create((set, get) => ({
     fetchOrdersById: async (id) => {
         set({loading: true});
         try {
-            const res = await axios.get(`/payments/transactions/${id}`);
+            const res = await axios.get(`/api/payments/transactions/${id}`);
             console.log(res.data);
             set({transactions: res.data});
         } catch (err) {
@@ -74,7 +74,7 @@ export const useOrdersStore = create((set, get) => ({
     getOrdersByItsId: async (id) => {
         set({loading: true});
         try {
-            const res = await axios.get(`/payments/order/${id}`);
+            const res = await axios.get(`/api/payments/order/${id}`);
             set({orders: res.data});
         } catch (err) {
             console.error("Error fetching user:", err);
@@ -87,7 +87,7 @@ export const useOrdersStore = create((set, get) => ({
     fetchOrders: async () => {
         set({loading: true});
         try {
-            const res = await axios.get("/analytics/orders");
+            const res = await axios.get("/api/analytics/orders");
             set({orders: res.data.totalOrders});
         } catch (err) {
             console.error("Error fetching user:", err);

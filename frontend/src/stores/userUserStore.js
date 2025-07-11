@@ -16,7 +16,7 @@ export const useUserStore = create((set, get) => ({
         }
 
         try {
-            const response = await axios.post("/auth/signup", {
+            const response = await axios.post("/api/auth/signup", {
                 name,
                 email,
                 password,
@@ -33,7 +33,7 @@ export const useUserStore = create((set, get) => ({
         set({loading: true});
 
         try {
-            const response = await axios.post("/auth/login", {
+            const response = await axios.post("/api/auth/login", {
                 email,
                 password,
             });
@@ -48,7 +48,7 @@ export const useUserStore = create((set, get) => ({
     checkAuth: async () => {
         set({checkingAuth: true});
         try {
-            const response = await axios.get("/auth/profile");
+            const response = await axios.get("/api/auth/profile");
             set({user: response.data, checkingAuth: false});
         } catch (error) {
             set({checkingAuth: false, user: null});
@@ -57,7 +57,7 @@ export const useUserStore = create((set, get) => ({
 
     logout: async () => {
         try {
-            const response = await axios.post("/auth/logout");
+            const response = await axios.post("/api/auth/logout");
             set({user: null});
             toast.success(response.data.message || "Logged out successfully");
         } catch (error) {
@@ -72,7 +72,7 @@ export const useUserStore = create((set, get) => ({
 
         set({checkingAuth: true});
         try {
-            const response = await axios.post("/auth/refresh-token");
+            const response = await axios.post("/api/auth/refresh-token");
             set({checkingAuth: false});
             return response.data;
         } catch (error) {

@@ -10,7 +10,7 @@ export const useProductStore = create((set, get) => ({
     createProduct: async ({name, description, price, image, category}) => {
         set({loading: true});
         try {
-            const response = await axios.post("/products", {
+            const response = await axios.post("/api/products", {
                 name,
                 description,
                 price,
@@ -31,7 +31,7 @@ export const useProductStore = create((set, get) => ({
     deleteProduct: async (productId) => {
         set({loading: true});
         try {
-            const response = await axios.delete(`/products/${productId}`);
+            const response = await axios.delete(`/api/products/${productId}`);
             set((prevProducts) => ({
                 products: prevProducts.products.filter((product) => product._id !== productId),
                 loading: false,
@@ -46,7 +46,7 @@ export const useProductStore = create((set, get) => ({
     fetchProductsByCategory: async (category) => {
         set({loading: true});
         try {
-            const response = await axios.get(`/products/category/${category}`);
+            const response = await axios.get(`/api/products/category/${category}`);
             set({products: response.data.products, loading: false});
         } catch (error) {
             set({error: "Error fetching products", loading: false});
@@ -57,7 +57,7 @@ export const useProductStore = create((set, get) => ({
     fetchAllProducts: async () => {
         set({loading: true});
         try {
-            const response = await axios.get("/products");
+            const response = await axios.get("/api/products");
             set({products: response.data.products, loading: false});
         } catch (error) {
             set({error: "Error fetching products", loading: false});
@@ -68,7 +68,7 @@ export const useProductStore = create((set, get) => ({
     toggleFeaturedProduct: async (productId) => {
         set({loading: true});
         try {
-            const response = await axios.patch(`/products/${productId}`);
+            const response = await axios.patch(`/api/products/${productId}`);
             set((prevProducts) => ({
                 products: prevProducts.products.map((product) =>
                     product._id === productId ? {...product, isFeatured: !product.isFeatured} : product
@@ -84,7 +84,7 @@ export const useProductStore = create((set, get) => ({
     fetchFeaturedProducts: async () => {
         set({loading: true});
         try {
-            const response = await axios.get("/products/featured");
+            const response = await axios.get("/api/products/featured");
             set({products: response.data.featuredProducts, loading: false});
         } catch (error) {
             set({error: "Error fetching featured products", loading: false});
