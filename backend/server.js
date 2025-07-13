@@ -37,11 +37,9 @@ app.use("/api/shipping-address", shippingAddressRoutes);
 app.use("/api/reviews", reviewRoutes);
 
 // Serve the React app
-if (process.env.NODE_ENV === "production") {
-    app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
-    });
-}
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
 
 // Start the server
 app.listen(PORT, () => {
