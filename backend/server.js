@@ -18,10 +18,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const __dirname = path.resolve();
-
-// Serve static files
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
 // Middleware to parse JSON bodies
 app.use(express.json({limit: "10mb"}));
 // Middleware to parse cookies
@@ -36,6 +32,8 @@ app.use("/api/analytics", analyticsRoutes);
 app.use("/api/shipping-address", shippingAddressRoutes);
 app.use("/api/reviews", reviewRoutes);
 
+// Serve static files
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
 // Serve the React app
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
