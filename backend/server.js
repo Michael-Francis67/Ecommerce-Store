@@ -37,7 +37,7 @@ app.use("/api/shipping-address", shippingAddressRoutes);
 app.use("/api/reviews", reviewRoutes);
 
 // Serve the React app
-app.get("/*", (req, res) => {
+app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
 
