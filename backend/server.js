@@ -35,7 +35,7 @@ app.use("/api/reviews", reviewRoutes);
 // Serve static files
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 // Serve the React app
-app.get("{0|(.*)}", (req, res) => {
+app.get("{0,}", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
 });
 
