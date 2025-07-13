@@ -7,7 +7,7 @@ export const protectRoute = async (req, res, next) => {
         // Check if the token is provided
 
         if (!token) {
-            return res.status(400).json({message: "Unauthorized - No access token provided"});
+            return res.status(401).json({message: "Unauthorized - No access token provided"});
         }
 
         try {
