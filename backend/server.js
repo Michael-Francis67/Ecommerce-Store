@@ -8,6 +8,7 @@ import paymentRoutes from "./routes/payment.routes.js";
 import analyticsRoutes from "./routes/analytics.routes.js";
 import shippingAddressRoutes from "./routes/shippingAddress.routes.js";
 import reviewRoutes from "./routes/reviews.routes.js";
+import job from "./lib/cron.js";
 import connectDB from "./lib/db.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -29,6 +30,8 @@ if (process.env.NODE_ENV === "development") {
         })
     );
 }
+
+if (process.env.NODE_ENV === 'production') job.start();
 // Middleware to parse JSON bodies
 app.use(express.json({limit: "10mb"}));
 // Middleware to parse cookies
