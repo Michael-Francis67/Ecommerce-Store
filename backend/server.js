@@ -20,7 +20,8 @@ const PORT = process.env.PORT || 5000;
 
 const __dirname = path.resolve();
 
-if (process.env.NODE_ENV !== 'production') {
+
+if (process.env.NODE_ENV === "development") {
     app.use(
         cors({
             origin: "http://localhost:5173",
@@ -33,22 +34,20 @@ app.use(express.json({limit: "10mb"}));
 // Middleware to parse cookies
 app.use(cookieParser());
 
-app.use("/auth", authRoutes);
-app.use("/products", productRoutes);
-app.use("/cart", cartRoutes);
-app.use("/coupons", couponRoutes);
-app.use("/payments", paymentRoutes);
-app.use("/analytics", analyticsRoutes);
-app.use("/shipping-address", shippingAddressRoutes);
-app.use("/reviews", reviewRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/coupons", couponRoutes);
+app.use("/api/payments", paymentRoutes);
+app.use("/api/analytics", analyticsRoutes);
+app.use("/api/shipping-address", shippingAddressRoutes);
+app.use("/api/reviews", reviewRoutes);
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, "../frontend/dist")));
+app.use(express.static(path.join(__dirname, "./frontend/dist")));
 
-    app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-    });
-}
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "./frontend/dist/index.html"));
+});
 
 connectDB().then(() => {
     app.listen(PORT, () => {
