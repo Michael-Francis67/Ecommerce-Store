@@ -13,7 +13,7 @@ export const useReviewStore = create((set, get) => ({
     createReview: async (productId, rating, review) => {
         set({loading: true});
         try {
-            const res = await axios.post(`/api/reviews/${productId}`, {rating, comment: review});
+            const res = await axios.post(`/reviews/${productId}`, {rating, comment: review});
             console.log(res.data);
             set({reviews: res.data, product: res.data.product});
             set({user: res.data.user});
@@ -28,7 +28,7 @@ export const useReviewStore = create((set, get) => ({
     fetchReviews: async (productId) => {
         set({loading: true});
         try {
-            const res = await axios.get(`/api/reviews/${productId}`);
+            const res = await axios.get(`/reviews/${productId}`);
             console.log(res.data);
             set({reviews: res.data.product.reviews});
             set({product: res.data.product});
